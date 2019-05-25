@@ -1,0 +1,650 @@
+
+ ANSYS Academic Teaching Advanced                  
+
+
+ *------------------------------------------------------------------*
+ |                                                                  |
+ |   W E L C O M E   T O   T H E   A N S Y S (R)  P R O G R A M     |
+ |                                                                  |
+ *------------------------------------------------------------------*
+
+
+
+
+ ***************************************************************
+ *            ANSYS Release 17.2     LEGAL NOTICES             *
+ ***************************************************************
+ *                                                             *
+ * Copyright 2016 SAS IP, Inc.  All rights reserved.           *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2008 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+ Release 17.2
+     
+ Point Releases and Patches installed:   
+     
+ ANSYS, Inc. Products Release 17.2   
+ ANSYS Mechanical Products Release 17.2  
+ ANSYS Customization Files for User Programmable Features Release 17.2   
+ ANSYS AIM Release 17.2  
+ ANSYS CFX (includes ANSYS CFD-Post) Release 17.2
+ ANSYS Fluent (includes ANSYS CFD-Post) Release 17.2 
+ ANSYS TurboGrid Release 17.2
+ ANSYS Polyflow (includes ANSYS CFD-Post) Release 17.2   
+ ANSYS CFD-Post only Release 17.2
+ ANSYS ICEM CFD Release 17.2 
+ ANSYS Icepak (includes ANSYS CFD-Post) Release 17.2 
+ AutoCAD Release 17.2
+ ACIS Release 17.2   
+ Catia, Version 5 Release 17.2   
+ Catia, Version 6 Release 17.2   
+ Creo Elements/Direct Modeling Release 17.2  
+ Inventor Release 17.2   
+ JTOpen Release 17.2 
+ NX Release 17.2 
+ Parasolid Release 17.2  
+ Creo Parametric (formerly Pro/ENGINEER) Release 17.2
+ Solid Edge Release 17.2 
+ SolidWorks Release 17.2 
+ ANSYS, Inc. License Manager Release 17.2
+
+
+          *****  ANSYS COMMAND LINE ARGUMENTS  *****
+  BATCH MODE REQUESTED (-b)    = NOLIST
+  INPUT FILE COPY MODE (-c)    = COPY
+  DISTRIBUTED MEMORY PARALLEL REQUESTED
+       2 PARALLEL PROCESSES REQUESTED WITH SINGLE THREAD PER PROCESS
+    TOTAL OF     2 CORES REQUESTED
+  DESIGNXPLORER REQUESTED
+  MPI OPTION                   = INTELMPI
+  INPUT FILE NAME              = Z:\Betreute Studentische Arbeiten\Projektarbeit Qian Sun\Programme\Platte\_ProjectScratch\Scr4527\dummy.dat
+  OUTPUT FILE NAME             = Z:\Betreute Studentische Arbeiten\Projektarbeit Qian Sun\Programme\Platte\_ProjectScratch\Scr4527\solve.out
+  START-UP FILE MODE           = NOREAD
+  STOP FILE MODE               = NOREAD
+
+ RELEASE= Release 17.2         BUILD= 17.2      UP20160718   VERSION=WINDOWS x64 
+ CURRENT JOBNAME=file0  09:55:36  JAN 21, 2019 CP=      1.092
+
+
+ PARAMETER _DS_PROGRESS =     999.0000000    
+
+ /INPUT FILE= ds.dat  LINE=       0
+
+ *GET  _WALLSTRT  FROM  ACTI  ITEM=TIME WALL  VALUE=  9.92666667    
+
+ TITLE= 
+ Vergleich_Ansys--Modalanalyse (C5)                                            
+
+
+ SET PARAMETER DIMENSIONS ON  _WB_PROJECTSCRATCH_DIR
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_PROJECTSCRATCH_DIR(1) = Z:\Betreute Studentische Arbeiten\Projektarbeit Qian Sun\Programme\Platte\_ProjectScratch\Scr4527\
+
+ SET PARAMETER DIMENSIONS ON  _WB_SOLVERFILES_DIR
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_SOLVERFILES_DIR(1) = Z:\Betreute Studentische Arbeiten\Projektarbeit Qian Sun\Programme\Platte\Vergleich_Ansys_files\dp0\SYS-2\MECH\
+
+ SET PARAMETER DIMENSIONS ON  _WB_USERFILES_DIR
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_USERFILES_DIR(1) = Z:\Betreute Studentische Arbeiten\Projektarbeit Qian Sun\Programme\Platte\Vergleich_Ansys_files\user_files\
+ --- Data in consistent MKS units. See Solving Units in the help system for more
+
+ MKS UNITS SPECIFIED FOR INTERNAL    
+  LENGTH        (l)  = METER (M)
+  MASS          (M)  = KILOGRAM (KG)
+  TIME          (t)  = SECOND (SEC)
+  TEMPERATURE   (T)  = CELSIUS (C)
+  TOFFSET            = 273.0
+  CHARGE        (Q)  = COULOMB
+  FORCE         (f)  = NEWTON (N) (KG-M/SEC2)
+  HEAT               = JOULE (N-M)
+
+  PRESSURE           = PASCAL (NEWTON/M**2)
+  ENERGY        (W)  = JOULE (N-M)
+  POWER         (P)  = WATT (N-M/SEC)
+  CURRENT       (i)  = AMPERE (COULOMBS/SEC)
+  CAPACITANCE   (C)  = FARAD
+  INDUCTANCE    (L)  = HENRY
+  MAGNETIC FLUX      = WEBER
+  RESISTANCE    (R)  = OHM
+  ELECTRIC POTENTIAL = VOLT
+
+ INPUT  UNITS ARE ALSO SET TO MKS 
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Teaching Advanced                  
+
+ 00429183  VERSION=WINDOWS x64   09:55:36  JAN 21, 2019 CP=      1.248
+
+ Vergleich_Ansys--Modalanalyse (C5)                                            
+
+
+
+          ***** ANSYS ANALYSIS DEFINITION (PREP7) *****
+ *********** Nodes for the whole assembly ***********
+ *********** Elements for Body 1 "Schalenk_rper" ***********
+ *********** Send User Defined Coordinate System(s) ***********
+ *********** Set Reference Temperature ***********
+ *********** Send Materials ***********
+ *********** Send Sheet Properties ***********
+ *********** Fixed Supports ***********
+ ******* Constant Zero Displacement X *******
+ ******* Constant Zero Displacement Y *******
+ ******* Constant Zero Displacement Z *******
+
+
+ ***** ROUTINE COMPLETED *****  CP =         1.342
+
+
+ --- Number of total nodes = 10201
+ --- Number of contact elements = 0
+ --- Number of spring elements = 0
+ --- Number of bearing elements = 0
+ --- Number of solid elements = 10000
+ --- Number of total elements = 10000
+
+ *GET  _WALLBSOL  FROM  ACTI  ITEM=TIME WALL  VALUE=  9.92666667    
+
+ *****  ANSYS SOLUTION ROUTINE  *****
+
+
+ PERFORM A MODAL ANALYSIS
+  THIS WILL BE A NEW ANALYSIS
+
+
+ USE SYM. BLOCK LANCZOS MODE EXTRACTION METHOD
+  EXTRACT   10 MODES
+  NORMALIZE THE MODE SHAPES TO THE MASS MATRIX
+
+ ERASE THE CURRENT DATABASE OUTPUT CONTROL TABLE.
+
+
+ WRITE ALL  ITEMS TO THE DATABASE WITH A FREQUENCY OF NONE
+   FOR ALL APPLICABLE ENTITIES
+
+ WRITE NSOL ITEMS TO THE DATABASE WITH A FREQUENCY OF ALL 
+   FOR ALL APPLICABLE ENTITIES
+
+
+ EXPAND ALL EXTRACTED MODES
+  DO NOT CALCULATE ELEMENT RESULTS
+
+ *GET  ANSINTER_  FROM  ACTI  ITEM=INT        VALUE=  0.00000000    
+
+ *IF  ANSINTER_                         ( =   0.00000     )  NE  
+      0                                 ( =   0.00000     )  THEN    
+
+ *ENDIF
+
+ *****  ANSYS SOLVE    COMMAND  *****
+
+ *** WARNING ***                         CP =       1.357   TIME= 09:55:36
+ Element shape checking is currently inactive.  Issue SHPP,ON or         
+ SHPP,WARN to reactivate, if desired.                                    
+
+ *** NOTE ***                            CP =       1.420   TIME= 09:55:36
+ The model data was checked and warning messages were found.             
+  Please review output or errors file ( Z:\Betreute Studentische         
+ Arbeiten\Projektarbeit Qian                                             
+ Sun\Programme\Platte\_ProjectScratch\Scr4527\file0.err ) for these      
+ warning messages.                                                       
+
+ *** SELECTION OF ELEMENT TECHNOLOGIES FOR APPLICABLE ELEMENTS ***
+      --- GIVE SUGGESTIONS AND RESET THE KEY OPTIONS ---
+
+ ELEMENT TYPE    1 IS SHELL181. IT IS ASSOCIATED WITH ELASTOPLASTIC 
+ MATERIALS ONLY. KEYOPT(8)=2 IS SUGGESTED AND KEYOPT(3)=2 IS SUGGESTED FOR
+ HIGHER ACCURACY OF MEMBRANE STRESSES; OTHERWISE, KEYOPT(3)=0 IS SUGGESTED. 
+ KEYOPT(8) HAS BEEN RESET BUT KEYOPT(3) CAN NOT BE RESET HERE. PLEASE RESET 
+ IT MANUALLY IF NECESSARY.
+  KEYOPT(1-12)=    0    0    2    0    0    0    0    2    0    0    0    0
+
+ ELEMENT TYPE    1 HAS KEYOPT(3)=2. FOR THE SPECIFIED ANALYSIS TYPE, LUMPED MASS
+ MATRIX OPTION (LUMPM, ON) IS SUGGESTED.
+
+
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Teaching Advanced                  
+
+ 00429183  VERSION=WINDOWS x64   09:55:36  JAN 21, 2019 CP=      1.420
+
+ Vergleich_Ansys--Modalanalyse (C5)                                            
+
+
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .3-D                  
+   DEGREES OF FREEDOM. . . . . . UX   UY   UZ   ROTX ROTY ROTZ
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .MODAL                
+      EXTRACTION METHOD. . . . . . . . . . . . . .BLOCK LANCZOS
+   OFFSET TEMPERATURE FROM ABSOLUTE ZERO . . . . .  273.15    
+   NUMBER OF MODES TO EXTRACT. . . . . . . . . . .    10
+   GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC  
+   NUMBER OF MODES TO EXPAND . . . . . . . . . . .ALL
+   ELEMENT RESULTS CALCULATION . . . . . . . . . .OFF
+
+ *** NOTE ***                            CP =       1.451   TIME= 09:55:36
+ The conditions for direct assembly have been met.  No .emat or .erot    
+ files will be produced.                                                 
+
+  
+  
+     D I S T R I B U T E D   D O M A I N   D E C O M P O S E R
+  
+  ...Number of elements: 10000
+  ...Number of nodes:    10201
+  ...Decompose to 2 CPU domains
+  ...Element load balance ratio =     1.000
+
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     1
+   THERMAL STRAINS INCLUDED IN THE LOAD VECTOR . .   YES
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS
+      ITEM     FREQUENCY   COMPONENT
+       ALL       NONE               
+      NSOL        ALL               
+
+
+
+                         ***********  PRECISE MASS SUMMARY  ***********
+
+   TOTAL RIGID BODY MASS MATRIX ABOUT ORIGIN
+               Translational mass               |   Coupled translational/rotational mass
+         314.00        0.0000        0.0000     |     0.0000        314.00        0.0000    
+         0.0000        314.00        0.0000     |    -314.00        0.0000        314.00    
+         0.0000        0.0000        314.00     |     0.0000       -314.00        0.0000    
+     ------------------------------------------ | ------------------------------------------
+                                                |         Rotational mass (inertia)
+                                                |     418.67        0.0000       -314.00    
+                                                |     0.0000        837.33        0.0000    
+                                                |    -314.00        0.0000        418.67    
+
+   TOTAL MASS =  314.00    
+     The mass principal axes coincide with the global Cartesian axes
+
+   CENTER OF MASS (X,Y,Z)=    1.0000        0.0000        1.0000    
+
+   TOTAL INERTIA ABOUT CENTER OF MASS
+         104.67        0.0000      -0.39790E-11
+         0.0000        209.33        0.0000    
+       -0.39790E-11    0.0000        104.67    
+     The inertia principal axes coincide with the global Cartesian axes
+
+
+  *** MASS SUMMARY BY ELEMENT TYPE ***
+
+  TYPE      MASS
+     1   314.000    
+
+ Range of element maximum matrix coefficients in global coordinates
+ Maximum = 1.034294265E+09 at element 3.                                 
+ Minimum = 954407037 at element 3045.                                    
+
+   *** ELEMENT MATRIX FORMULATION TIMES
+  TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+     1     10000  SHELL181      1.154   0.000115
+ Time at end of element matrix formulation CP = 2.51161623.              
+
+  BLOCK LANCZOS CALCULATION OF UP TO   10 EIGENVECTORS.
+  NUMBER OF EQUATIONS              =        59703
+  MAXIMUM WAVEFRONT                =           36
+  MAXIMUM MODES STORED             =           10
+  MINIMUM EIGENVALUE               =  0.00000E+00
+  MAXIMUM EIGENVALUE               =  0.10000E+31
+
+
+  Local memory allocated for solver              =     54.174 MB
+  Local memory required for in-core solution     =     51.664 MB
+  Local memory required for out-of-core solution =     19.941 MB
+
+  Total memory allocated for solver              =    105.428 MB
+  Total memory required for in-core solution     =    100.535 MB
+  Total memory required for out-of-core solution =     37.374 MB
+
+ *** NOTE ***                            CP =       2.964   TIME= 09:55:38
+ The Distributed Sparse Matrix Solver used by the Block Lanczos          
+ eigensolver is currently running in the in-core memory mode.  This      
+ memory mode uses the most amount of memory in order to avoid using the  
+ hard drive as much as possible, which most often results in the         
+ fastest solution time.  This mode is recommended if enough physical     
+ memory is present to accommodate all of the solver data.                
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Teaching Advanced                  
+
+ 00429183  VERSION=WINDOWS x64   09:55:39  JAN 21, 2019 CP=      3.978
+
+ Vergleich_Ansys--Modalanalyse (C5)                                            
+
+
+
+ *** FREQUENCIES FROM BLOCK LANCZOS ITERATION ***
+
+  MODE    FREQUENCY (HERTZ)      
+
+
+    1     14.71583491255    
+    2     32.16724381478    
+    3     36.51515162249    
+    4     53.60353530113    
+    5     62.45542727122    
+    6     70.53937218722    
+    7     83.27778478474    
+    8     87.68354786808    
+    9     105.3098042005    
+   10     116.8456301270    
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Teaching Advanced                  
+
+ 00429183  VERSION=WINDOWS x64   09:55:40  JAN 21, 2019 CP=      4.134
+
+ Vergleich_Ansys--Modalanalyse (C5)                                            
+
+
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****  X  DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     14.7158       0.67954E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     2     32.1672       0.31088E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     3     36.5152       0.27386E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     4     53.6035       0.18655E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     5     62.4554       0.16011E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     6     70.5394       0.14176E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     7     83.2778       0.12008E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     8     87.6835       0.11405E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     9     105.310       0.94958E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+    10     116.846       0.85583E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****  Y  DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     14.7158       0.67954E-01   -13.794        1.000000     190.274        0.789374        0.605970    
+     2     32.1672       0.31088E-01  -0.66822E-04    0.000005    0.446521E-08    0.789374        0.142204E-10
+     3     36.5152       0.27386E-01   -1.0087        0.073129     1.01755        0.793595        0.324060E-02
+     4     53.6035       0.18655E-01   0.11170E-05    0.000000    0.124759E-11    0.793595        0.397322E-14
+     5     62.4554       0.16011E-01   -4.6635        0.338084     21.7485        0.883821        0.692627E-01
+     6     70.5394       0.14176E-01   -5.2518        0.380730     27.5814        0.998245        0.878387E-01
+     7     83.2778       0.12008E-01  -0.11209        0.008126    0.125631E-01    0.998297        0.400098E-04
+     8     87.6835       0.11405E-01   0.17188E-04    0.000001    0.295437E-09    0.998297        0.940883E-12
+     9     105.310       0.94958E-02  -0.15000E-03    0.000011    0.225009E-07    0.998297        0.716590E-10
+    10     116.846       0.85583E-02  -0.64063        0.046442    0.410401         1.00000        0.130701E-02
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                             241.045                        0.767659    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****  Z  DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     14.7158       0.67954E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     2     32.1672       0.31088E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     3     36.5152       0.27386E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     4     53.6035       0.18655E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     5     62.4554       0.16011E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     6     70.5394       0.14176E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     7     83.2778       0.12008E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     8     87.6835       0.11405E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     9     105.310       0.94958E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+    10     116.846       0.85583E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****ROTX DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     14.7158       0.67954E-01    13.794        1.000000     190.275        0.617093        0.454476    
+     2     32.1672       0.31088E-01   -6.9546        0.504175     48.3664        0.773953        0.115524    
+     3     36.5152       0.27386E-01    1.0090        0.073146     1.01804        0.777255        0.243162E-02
+     4     53.6035       0.18655E-01  -0.29072        0.021076    0.845195E-01    0.777529        0.201877E-03
+     5     62.4554       0.16011E-01    4.6635        0.338084     21.7486        0.848063        0.519470E-01
+     6     70.5394       0.14176E-01    5.2518        0.380733     27.5818        0.937516        0.658797E-01
+     7     83.2778       0.12008E-01   0.11167        0.008095    0.124699E-01    0.937556        0.297846E-04
+     8     87.6835       0.11405E-01    2.5481        0.184725     6.49281        0.958613        0.155082E-01
+     9     105.310       0.94958E-02   -3.5143        0.254769     12.3503        0.998667        0.294989E-01
+    10     116.846       0.85583E-02   0.64106        0.046474    0.410962         1.00000        0.981592E-03
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                             308.341                        0.736478    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****ROTY DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     14.7158       0.67954E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     2     32.1672       0.31088E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     3     36.5152       0.27386E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     4     53.6035       0.18655E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     5     62.4554       0.16011E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     6     70.5394       0.14176E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     7     83.2778       0.12008E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     8     87.6835       0.11405E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     9     105.310       0.94958E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+    10     116.846       0.85583E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****ROTZ DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     14.7158       0.67954E-01   -15.186        1.000000     230.610        0.711494        0.550816    
+     2     32.1672       0.31088E-01   0.16987E-03    0.000011    0.288547E-07    0.711494        0.689201E-10
+     3     36.5152       0.27386E-01    5.4961        0.361924     30.2074        0.804692        0.721510E-01
+     4     53.6035       0.18655E-01  -0.19342E-04    0.000001    0.374094E-09    0.804692        0.893530E-12
+     5     62.4554       0.16011E-01   -4.9405        0.325333     24.4081        0.879997        0.582991E-01
+     6     70.5394       0.14176E-01   -5.0006        0.329290     25.0055        0.957146        0.597262E-01
+     7     83.2778       0.12008E-01    2.1232        0.139813     4.50786        0.971054        0.107671E-01
+     8     87.6835       0.11405E-01   0.37058E-03    0.000024    0.137331E-06    0.971054        0.328017E-09
+     9     105.310       0.94958E-02   0.30191E-03    0.000020    0.911506E-07    0.971054        0.217715E-09
+    10     116.846       0.85583E-02    3.0630        0.201701     9.38199         1.00000        0.224091E-01
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                             324.121                        0.774169    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+ *** ANSYS BINARY FILE STATISTICS
+  BUFFER SIZE USED= 16384
+        9.500 MB WRITTEN ON ASSEMBLED MATRIX FILE: file0.full
+        2.938 MB WRITTEN ON MODAL MATRIX FILE: file0.mode
+        4.375 MB WRITTEN ON RESULTS FILE: file0.rst
+ *************** Write FE CONNECTORS *********
+
+ WRITE OUT CONSTRAINT EQUATIONS TO FILE= file.ce                                                                                                                                                                                                                                                             
+
+ *GET  _NMODALSOLPROC  FROM  ACTI  ITEM=NUMC       VALUE=  2.00000000    
+
+ FINISH SOLUTION PROCESSING
+
+
+ ***** ROUTINE COMPLETED *****  CP =         4.446
+
+
+
+ PRINTOUT RESUMED BY /GOP
+
+ *GET  _WALLASOL  FROM  ACTI  ITEM=TIME WALL  VALUE=  9.92805556    
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Teaching Advanced                  
+
+ 00429183  VERSION=WINDOWS x64   09:55:41  JAN 21, 2019 CP=      4.508
+
+ Vergleich_Ansys--Modalanalyse (C5)                                            
+
+
+
+          ***** ANSYS RESULTS INTERPRETATION (POST1) *****
+
+ *** NOTE ***                            CP =       4.508   TIME= 09:55:41
+ Reading results into the database (SET command) will update the current 
+ displacement and force boundary conditions in the database with the     
+ values from the results file for that load set.  Note that any          
+ subsequent solutions will use these values unless action is taken to    
+ either SAVE the current values or not overwrite them (/EXIT,NOSAVE).    
+
+ PRINTOUT RESUMED BY /GOP
+
+ Set Encoding of XML File to:ISO-8859-1
+
+ Set Output of XML File to:
+     PARM,     ,     ,     ,     ,     ,     ,     ,     ,     ,     ,     ,
+         ,     ,     ,     ,     ,     ,     ,
+
+ DATABASE WRITTEN ON FILE  parm.xml                                                                                                                                                                                                                                                            
+
+ EXIT THE ANSYS POST1 DATABASE PROCESSOR
+
+
+ ***** ROUTINE COMPLETED *****  CP =         4.633
+
+
+
+ PRINTOUT RESUMED BY /GOP
+
+ *GET  _WALLDONE  FROM  ACTI  ITEM=TIME WALL  VALUE=  9.92833333    
+
+ PARAMETER _PREPTIME =     0.000000000    
+
+ PARAMETER _SOLVTIME =     5.000000000    
+
+ PARAMETER _POSTTIME =     1.000000000    
+
+ PARAMETER _TOTALTIM =     6.000000000    
+
+ EXIT ANSYS WITHOUT SAVING DATABASE
+
+
+ NUMBER OF WARNING MESSAGES ENCOUNTERED=          1
+ NUMBER OF ERROR   MESSAGES ENCOUNTERED=          0
+
++--------- D I S T R I B U T E D   A N S Y S   S T A T I S T I C S ------------+
+
+Release: Release 17.2       Build: 17.2       Update: UP20160718   Platform: WINDOWS x64 
+Date Run: 01/21/2019   Time: 09:55
+Operating System: Windows 7 Service Pack 1 (Build: 7601)
+Windows Process ID: 11048       
+
+Processor Model: AMD FX(tm)-9590 Eight-Core Processor
+
+Compiler: Intel(R) FORTRAN Compiler Version 15.0.2  (Build: 20150121)
+          Intel(R) C/C++ Compiler Version 15.0.2  (Build: 20150121)
+          Intel(R) Math Kernel Library Version 11.2.3 Product Build 20150413
+
+Number of machines requested            :    1
+Total number of cores available         :    8
+Number of physical cores available      :    4
+Number of processes requested           :    2
+Number of threads per process requested :    1
+Total number of cores requested         :    2 (Distributed Memory Parallel)               
+MPI Type: INTELMPI
+MPI Version: Intel(R) MPI Library 5.0 Update 3 for Windows* OS
+
+
+GPU Acceleration: Not Requested
+
+Job Name: file0
+Input File: dummy.dat
+
+  Core                Machine Name   Working Directory
+  ----------------------------------------------------
+     0                     imfd084   Z:\Betreute Studentische Arbeiten\Projektarbeit Qian Sun\Programme\Platte\_ProjectScratch\Scr4527
+     1                     imfd084   Z:\Betreute Studentische Arbeiten\Projektarbeit Qian Sun\Programme\Platte\_ProjectScratch\Scr4527
+ 
+Latency time from master to core    1 =    1.210 microseconds
+ 
+Communication speed from master to core    1 =  2903.03 MB/sec
+
+Total CPU time for main thread                    :        4.3 seconds
+Total CPU time summed for all threads             :        4.6 seconds
+
+Elapsed time spent pre-processing model (/PREP7)  :        0.1 seconds
+Elapsed time spent solution - preprocessing       :        0.1 seconds
+Elapsed time spent computing solution             :        3.3 seconds
+Elapsed time spent solution - postprocessing      :        1.2 seconds
+Elapsed time spent post-processing model (/POST1) :        0.4 seconds
+ 
+Eigensolver used                                  :            Block Lanczos
+Equation solver computational rate                :     6355.8 Mflops
+Equation solver effective I/O rate                :     9461.3 MB/sec
+
+Maximum total memory used                         :      312.0 MB
+Maximum total memory allocated                    :     3136.0 MB
+Maximum total memory available                    :         32 GB
+
++------ E N D   D I S T R I B U T E D   A N S Y S   S T A T I S T I C S -------+
+
+
+ *---------------------------------------------------------------------------*
+ |                                                                           |
+ |                       DISTRIBUTED ANSYS RUN COMPLETED                     |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Ansys Release 17.2          Build 17.2         UP20160718     WINDOWS x64 |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Database Requested(-db)  1024 MB    Scratch Memory Requested      1024 MB |
+ | Maximum Database Used       8 MB    Maximum Scratch Memory Used    157 MB |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ |        CP Time      (sec) =          4.649       Time  =  09:55:42        |
+ |        Elapsed Time (sec) =          8.000       Date  =  01/21/2019      |
+ |                                                                           |
+ *---------------------------------------------------------------------------*

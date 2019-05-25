@@ -1,0 +1,50 @@
+\documentclass[t,10pt,handout,hyperref={pdfpagemode=FullScreen}]{beamer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pakete laden
+\usepackage{selinput}				% Inputencoding
+	\SelectInputMappings{adieresis={ä}, germandbls={ß}, Euro={€}}
+\usepackage[T1]{fontenc}			% Fontencoding
+%
+\usepackage{pifont}				% Dingbats (Pfeile u.a.)
+\usepackage{csquotes}				% Anführungszeichen; wird von biblatex gewünscht
+%\usepackage[backend=biber,sortlocale=de_DE_phonebook]{biblatex}	% Literatur formatieren
+%\addbibresource{Presentation.bib}	% Literaturdatenbank
+\usepackage{cite}
+\bibliographystyle{alpha}
+
+\usepackage{ulem} % underline
+\usepackage{multirow}
+\usepackage{diagbox} 
+\usepackage{wasysym}
+
+\newcommand{\Matlab}{\textsc{Matlab}\textsuperscript{\textregistered} }
+\newcommand{\Ansys}{\textsc{Ansys}\textsuperscript{\textregistered} }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thema für Präsentation
+\usetheme{TUBAF}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Optionen f"ur Anmerkungen
+\mode<presentation>{%
+\setbeameroption{hide notes}				% keine Notizen (default)
+%\setbeameroption{show notes}				% Notizen und Frames gemischt
+%\setbeameroption{show only notes}			% nur Notizen
+%
+%\usepackage{pgfpages}					% wird für nachfolgendes benötigt
+%\setbeameroption{show notes on second screen=left}	% wie gesagt; left, right, bottom, top
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Titel.tex}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% alternativ zu den Chemie-Paketen
+\newcommand{\zwei}{\textsubscript{2}}
+
+% den eigentlichen Inhalt laden
+\input{Inhalt.tex}
+
+\end{document}

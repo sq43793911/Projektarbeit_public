@@ -1,0 +1,21 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+template1 = GetTemplate(
+    TemplateName="Modal",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit()
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Edit()
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+material1 = engineeringData1.GetMaterial(Name="Baustahl")
+matlProp1 = material1.GetProperty(Name="Elasticity")
+matlProp1.SetData(
+    Variables=["Young's Modulus"],
+    Values=[["210000000000 [Pa]"]])
+Save(Overwrite=True)
+Save(Overwrite=True)

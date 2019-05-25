@@ -1,0 +1,19 @@
+\begin{thebibliography}{Wau14}
+
+\bibitem[Sch91]{schwarz2013methode}
+Hans-Rudolf Schwarz.
+\newblock {\em Methode der finiten Elemente: eine Einf{\"u}hrung unter
+  besonderer Ber{\"u}cksichtigung der Rechenpraxis}, volume~47.
+\newblock Teubner-Verlag, 1991.
+
+\bibitem[SP95]{stephan1995schwingungen}
+Wolfgang Stephan and Rudolf Postl.
+\newblock {\em Schwingungen elastischer Kontinua}.
+\newblock Springer, 1995.
+
+\bibitem[Wau14]{wauer2014kontinuumsschwingungen}
+J{\"o}rg Wauer.
+\newblock {\em Kontinuumsschwingungen}.
+\newblock Springer, 2014.
+
+\end{thebibliography}

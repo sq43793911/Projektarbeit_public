@@ -1,0 +1,599 @@
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+%\usepackage{macroswap}
+%\geometry{left=3.5cm, right=3.5cm, top=3cm, bottom=3cm}
+\usepackage{polyglossia}
+\usepackage{titling}
+%\posttitle{\par\end{center}\vspace{100mm}}
+\numberwithin{equation}{section}
+\setlength{\parindent}{0pt} %no indent
+
+\usepackage{german}
+\usepackage{pgfplots}
+
+\begin{document}
+	\title{Modalanalyse mit Hilfe der Finiten-Elemente-Methode}
+	\author{Qian Sun}
+	\maketitle
+	
+	\newpage
+	
+	\tableofcontents
+	
+	\newpage
+
+	\section{Einleitung}
+	Modalanalyse\\
+	FEM\\
+	Hamilton-Prinzip\\
+
+	\section{Theoretische Grundlagen}
+	\subsection{Prinzip von Hamilton}
+	Das Prinzip von Hamilton in seiner allgemeinsten Form geht aus dem Lagrange-d'Alembert-Prinzip hervor, allerdings nur Zusatzannahmen. Diese stellen aber für die praktische Anwendung des Prinzips von Hamilton keine Einschränkung gegenüber dem Lagrange-d'Alembert-Prinzip dar.
+	\par Synthetische Methoden, die auf verallgemeinerten Kräfte- und Momentengleichgewichten im Sinne d'Alemberts beruhen, werden hier nicht angesprochen. Ansonsten werden erneut ausschließlich analytische mechanische Prinzipe an den Anfang gestellt, wobei hier das Prinzip von Hamilton zur Anwendung kommen soll:
+	\begin{equation}\label{equ:Hamilton}
+	\delta\int_{t_{1}}^{t_{2}} \left( E_{kin}-E_{pot}\right)  \mathrm{d}t + \int_{t_{1}}^{t_{2}} \delta W \mathrm{d}t = 0
+	\end{equation}
+	Nacheinander sind also die kinetische Energie und die potenzielle Energie des Systems sowie die virtuelle Arbeit aller angreifenden potenziallosen Kräfte, zugeschnitten auf da zu betrachtende eins- oder zweiparametrige Strukturmodell, zu bestimmen.
+	
+	\subsection{Grundlagen der Finiten-Elemente-Methode}
+	Ein große Körper auf viel kleine Elemente zerlegen.
+	
+	\subsection{Eigenwertmethode}
+	
+	\section{Erste Dimension}
+	Jedes Element hat eigenes lokales Koordinatensystem. Das Element soll von -1 bis 1 sein, um die Gauß-Quadratur zu passen. Die Länge jedes Elements ist $ l_{e} $\\
+	Zur Beschreibung des Element hat man mehrerer Einsatzmethode. Als Vorbereitung soll das Intervall $ [0,l_{e}] $ auf das Einheitsintervall [-1,1] transformiert werden vermittels der Variablensubstitution zwischen die lokale Koordinate und globale Koordinate
+	\begin{equation}\label{equ:lokal-zu-global}
+	\left. 
+	\begin{array}{l}
+	\xi (x) = a_{0} + a_{1}x\\
+	\xi (x=0) \overset{!}{=} -1\\
+	\xi (x=l_{e})  \overset{!}{=} 1
+	\end{array} 
+	\right\rbrace \Rightarrow 
+	\xi = -1 + \frac{2}{l_{e}}x
+	\Rightarrow
+	\frac{\partial \xi}{\partial x} = \frac{2}{l_{e}}
+	\end{equation}
+	
+	\subsection{Längsschwingung von Stab}
+	
+	Anhand des Prinzips von Hamilton ist die potenzielle Energie von einem frei ungedämpften Stab mit der Längsschwingung $ u(x,t) $
+	\begin{equation}\label{equ:Stab-pot-Energie}
+	E_{pot} = \frac{1}{2} \int_{0}^{l} EA u_{,x}^{2} \mathrm{d}x
+	\end{equation}
+	
+	und die kinetische Energie ist
+	\begin{equation}\label{equ:Stab-kin-Energie}
+	E_{kin} = \frac{1}{2} \int_{0}^{l} \rho A u_{,t}^{2} \mathrm{d}x
+	\end{equation}
+	
+	und der virtuelle Arbeit ist
+	\begin{equation}\label{equ:Stab-virt-Arbeit}
+	\delta W = 0
+	\end{equation}
+	
+	in die Gleichung (\ref{equ:Hamilton}) einsetzen
+	\begin{equation}\label{equ:Stab-Hamilton}
+	\delta \int_{t_{0}}^{t_{1}} \int_{0}^{l} \frac{1}{2} \rho A u_{,t}^{2} - \frac{1}{2} E A u_{,x}^{2} \mathrm{d}x \mathrm{d}t = 0
+	\end{equation}
+	
+	der $ \delta $ - Operator variieren
+	\begin{equation}\label{equ:Stab-Hamilton-variiert}
+	\int_{t_{0}}^{t_{1}} \int_{0}^{l} \rho A u_{,t} \delta u_{,t} - E A u_{,x} \delta u_{,x} \mathrm{d}x \mathrm{d}t = 0
+	\end{equation}
+	
+	Durch partielle Integration wird die Gleichung (\ref{equ:Stab-Hamilton-variiert}) in die schwache Formulierung umsetzt
+	\begin{equation}\label{equ:Stab-Hamilton-Formulierung}
+	\int_{t_{0}}^{t_{1}} \int_{0}^{l} \rho A u_{,tt} \delta u - E A u_{,x} \delta u_{,x} \mathrm{d}x \mathrm{d}t = 0
+	\end{equation}
+	
+	Für die Ortsdiskretisierung dieser Gleichung werden folgende Ansätze verwendet:
+	\begin{equation}\label{equ:Stab-Hamilton-Ansatz}
+	\begin{array}{ll}
+	u(x,t) = \vec{N}(x) \vec{u}(t) &  \delta u(x,t) = \vec{N}(x) \delta \vec{u}(t) \\
+	u_{,t}(x,t) = \vec{N}(x) \vec{u}_{,t}(t)  & \delta u_{,x}(x,t) = \vec{N}_{,x}(x) \delta \vec{u}(t)  \\
+	u_{,tt}(x,t) = \vec{N}(x) \vec{u}_{,tt}(t) 
+	\end{array}
+	\end{equation}
+	
+	Die Ansätze (\ref{equ:Stab-Hamilton-Ansatz}) werden in die Gl.(\ref{equ:Stab-Hamilton-variiert}) eingesetzt, so entsteht folgende Gleichung
+	\begin{equation}\label{equ:Stab-Hamilton-end}
+	\int_{t_{0}}^{t_{1}} \int_{0}^{l} \left[ \rho A \vec{N}^{T}(x) \vec{N}(x) \vec{u}_{,tt}(t) + E A \vec{N}_{,x}^{T}(x) \vec{N}_{,x}(x) \vec{u}(t) \right] \mathrm{d}x \delta \vec{u}(t) \mathrm{d}t = 0
+	\end{equation}
+	
+	für ein Element ist die Massenmatrix
+	\begin{equation}\label{equ:Stab-Me-Matrix}
+	\mathbf{M}_{e} = \int_{0}^{l_{e}} \rho A \vec{N}^{T}(x) \vec{N}(x) \mathrm{d}x
+	\end{equation}
+	
+	die Steifigkeitsmatrix
+	\begin{equation}\label{equ:Stab-Ke-Matrix}
+	\mathbf{K}_{e} = \int_{0}^{l_{e}} E A \vec{N}_{,x}^{T}(x) \vec{N}_{,x}(x) \mathrm{d}x
+	\end{equation}
+	
+	Durch verschiedene Einsatzmethode kann $ \vec{N}(x) $ und $ \vec{N}_{,x}(x) $ für eines Element berechenbar werden. Danach können die Gesamtmassenmatrix $ \mathbf{M} $ und Gesamtsteifigkeitsmatrix $ \mathbf{K} $ durch verschiedene Regeln zusammengebaut werden.
+	Bei einem freie ungedämpften Stab ist der Ausgangspunkt
+	\begin{equation}\label{equ:Ausgangspunkt}
+	\mathbf{M} \cdot \ddot{\vec{x}}(t) + \mathbf{K} \cdot \vec{x}(t) = 0
+	\end{equation}
+	
+	Durch den Ansatz
+	\begin{equation}\label{equ:Ansatz-in-Systemmatrix}
+	\left. 
+	\begin{array}{c}
+	\vec{z}_{1} = \vec{x} \\
+	\vec{z}_{2} = \dot{\vec{x}}
+	\end{array}
+	\right\rbrace \Rightarrow	
+	\begin{array}{l}
+	\dot{\vec{z}}_{1} = \vec{z}_{2} \\
+	\dot{\vec{z}}_{2} = \ddot{\vec{x}} = - \mathbf{M}^{-1} \cdot \mathbf{K} \cdot \vec{x} = - \mathbf{M}^{-1} \cdot \mathbf{K} \cdot \vec{z}_{1}
+	\end{array}
+	\end{equation}
+	
+	wird der Ausgangspunkt nach erster Ordnung umgesetzt
+	\begin{equation}\label{equ:1st-Ausgangspunkt}
+	\left[ 
+	\begin{array}{c}
+	\dot{\vec{z}}_{1}\\
+	\dot{\vec{z}}_{2}
+	\end{array}
+	\right] 
+	=
+	\left[ 
+	\begin{array}{cc}
+	\mathbf{0}                        & \mathbf{E} \\
+	-\mathbf{M}^{-1} \cdot \mathbf{K} & \mathbf{0}
+	\end{array}
+	\right]
+	\cdot
+	\left[ 
+	\begin{array}{c}
+	\vec{z}_{1}\\
+	\vec{z}_{2}
+	\end{array}
+	\right] 
+	\end{equation}
+	
+	Durch die Gl(\ref{equ:1st-Ausgangspunkt}) kann die Eigenwerts von Systemmatrix
+	\begin{equation}\label{equ:Systemmatrix}
+	\left[ 
+	\begin{array}{cc}
+	\mathbf{0}                        & \mathbf{E} \\
+	-\mathbf{M}^{-1} \cdot \mathbf{K} & \mathbf{0}
+	\end{array}
+	\right]
+	\end{equation}
+	
+	die Eigenfrequenz von frei ungedämpftem Stab in der Längsrichtung liefern.
+	
+	\subsubsection{Linealischer Ansatz}
+	Für die Funktion $ u(\xi) $ soll ein linearer Ansatz von der Gestalt
+	
+	\begin{equation}\label{equ:linear-Einsatz}
+	u(\xi)=a_{0}+a_{1}\xi
+	\end{equation}
+	verwendet werden.
+		
+	Forderung für die Ansatzfunktion(\ref{equ:linear-Einsatz}):
+	\begin{equation}\label{equ:linear-Einsatz-Forderung}
+	u(-1) \overset{!}{=} u_{1} \ ; \  u(1) \overset{!}{=} u_{2}
+	\end{equation}	
+
+	Die Forderungen (\ref{equ:linear-Einsatz-Forderung}) werden in Ansatzfunktion(\ref{equ:linear-Einsatz}) eingesetzt. Dann wird ein Funktion in der lokalen Koordinate berechnet,
+	\begin{equation}\label{equ:linear-Einsatz-eingesetzt}
+	u(\xi)=\frac{u_{1}+u_{2}}{2} + \frac{1}{2} (-u_{1}+u_{2})\xi
+	\end{equation}
+	
+	und wird in ein algebraisch Form umgesetzt
+	\begin{equation}\label{equ:linear-Einsatz-Algebra}
+	u(\xi) = 
+	\left[ \begin{array}{cc}
+	\frac{1}{2} - \frac{\xi}{2} & \frac{1}{2} + \frac{\xi}{2}
+	\end{array} \right]	
+	\left[ 
+	\begin{array}{c}
+	u_{1}\\
+	u_{2}
+	\end{array} 
+	\right] 
+	\end{equation}
+	
+	d.h. den Parameter $ \vec{N}(\xi) $ ist bekannt
+	\begin{equation}\label{equ:linear-N-vektor}
+	\vec{N}(\xi) = \left[ 
+	\begin{array}{cc}
+	\frac{1}{2} - \frac{\xi}{2} & \frac{1}{2} + \frac{\xi}{2}
+	\end{array} \right] 
+	\end{equation}
+	
+	durch den Zusammenhang (\ref{equ:lokal-zu-global}) kann der Parameter $ \vec{N}_{,x}(\xi) $ durch die Ansätze von $ u(\xi,t) $ und $ u_{,x}(\xi,t) $ berechenbar sein
+	\begin{equation}\label{equ:Stab-u-Ansatz}
+	u(\xi,t)= \vec{N}(\xi) \vec{u}(t)  
+	\end{equation}
+
+	\begin{equation}\label{equ:stab-ux-Ableitung}
+	u_{,x}(\xi,t)= \frac{\partial}{\partial x} [\vec{N}(\xi) \vec{u}(t) ] = \frac{\partial}{\partial x} \frac{\partial \xi}{\partial \xi} [\vec{N}(\xi) \vec{u}(t)] =  \frac{\partial \vec{N}(\xi)}{\partial \xi} \cdot \frac{\partial \xi}{\partial x} \cdot \vec{u}(t)
+	\end{equation}
+	
+	deshalb ist die x-Ableitung von $ \vec{N}(\xi) $
+	\begin{equation}\label{equ:linear-N-x-Ableitung}
+	\vec{N}_{,x}(\xi) = \frac{\partial \vec{N}(\xi)}{\partial \xi} \cdot \frac{\partial \xi}{\partial x} =
+	\left[
+	\begin{array}{c c} 
+	-\frac{1}{2} & +\frac{1}{2} 
+	\end{array}
+	\right]
+	\cdot \frac{2}{l_{e}}
+	\end{equation}
+	
+	Jetzt kann die Massen- und Steifigkeitsmatrix jedes Elements durch die Parameter $ \vec{N}(x) $ und $ \vec{N}_{,x} $ berechnet werden. 
+	
+	Danach werden die Gesamtmatrix von Massen und Steifigkeit anhand der Massen- und Steifigkeitsmatrix jedes Elements zusammengebaut, z.B. die Massenmatrix i-tes Elements ist
+	\begin{equation}\label{equ:linear-Mei-matrix}
+	\mathbf{M}_{ei} = \left[ 
+	\begin{array}{cc}
+	M_{ei,11} & M_{ei,12} \\
+	M_{ei,21} & M_{ei,22}
+	\end{array}
+	\right] 
+	\end{equation}
+	
+	und die Gesamtmassenmatrix ist
+	\begin{equation}\label{equ:linear-M-Matrix}
+	\mathbf{M} = 
+	\left[ 
+	\begin{array}{ccccc}
+	M_{e1,11} & M_{e1,12}           & 0                   & 0                   & \cdots \\
+	M_{e1,21} & M_{e1,22}+M_{e2,11} & M_{e2,12}           & 0                   & \cdots \\
+	0         & M_{e2,21}           & M_{e2,22}+M_{e3,11} & M_{e3,12}           & \cdots \\
+	0         & 0                   & M_{e3,21}           & M_{e3,22}+M_{e4,11} & \cdots \\
+	\colon    & \colon              & \colon              & \colon              & \ddots 
+	\end{array}
+	\right] 
+	\end{equation}
+	Nach gleicher Regel kann die Gesamtsteifigkeitsmatrix $ \mathbf{K} $ berechnet werden.\\
+	
+	\subsubsection{Quadratischer Ansatz}
+	Mit einem quadratischen Ansatz
+	\begin{equation}\label{equ:quadra-ansatz}
+	u(\xi) = a_{0} + a_{1} \xi + c_{3} \xi
+	\end{equation}
+	gibt es drei Forderungen
+	\begin{equation}\label{equ:quadra-ansatz-forderungen}
+	u(-1) \overset{!}{=} u_{1} \ ; \ u(0) \overset{!}{=} u_{2} \ ; \ u(+1) \overset{!}{=} u_{3}
+	\end{equation}
+	
+	Die Forderungen (\ref{equ:quadra-ansatz-forderungen}) werden in Gl (\ref{equ:quadra-ansatz}) eingesetzt, dann wird die Funktion $ u(\xi) $ in der lokalen Koordinate und auf einen algebraischen Form umgesetzt
+	\begin{equation}\label{equ:quadra-ansatz-eingestzt}
+	u(\xi) = 
+	\left[ 
+	\begin{array}{ccc}
+	\frac{\xi^{2}}{2}-\frac{\xi}{2} & 1-\xi^{2} & \frac{\xi}{2}+\frac{\xi^{2}}{2}
+	\end{array}
+	\right] 
+	\left[ 
+	\begin{array}{c}
+	u_{1} \\
+	u_{2} \\
+	u_{3}
+	\end{array}
+	\right] 
+	\end{equation}
+	
+	Der Parameter $ \vec{N}(x) $ ist
+	\begin{equation}\label{equ:qudra-N-vektor}
+	\vec{N}(\xi) = 
+	\left[ 
+	\begin{array}{ccc}
+	\frac{\xi^{2}}{2}-\frac{\xi}{2} & 1-\xi^{2} & \frac{\xi}{2}+\frac{\xi^{2}}{2}
+	\end{array}
+	\right] 
+	\end{equation}
+	
+	und durch die Gl (\ref{equ:linear-N-x-Ableitung})) kann auch die x-Abteilung von $ \vec{N}(\xi) $ berechnet werden
+	\begin{equation}\label{equ:qudra-N-ableitung}
+	\vec{N}_{,x}(x) = \frac{\partial \vec{N}(\xi)}{\partial \xi} \cdot \frac{\partial \xi}{\partial x} =
+	\left[ 
+	\begin{array}{ccc}
+	\xi - \frac{1}{2} & -2\xi & \frac{1}{2} + \xi
+	\end{array}
+	\right] \cdot \frac{2}{l_{e}}
+	\end{equation} 
+	
+	Danach können die Massenmatrix $ \mathbf{M}_{e} $ und Steifigkeitsmatrix $ \mathbf{K}_{e} $ eines Elements anhand der Gleichung (\ref{equ:Stab-Me-Matrix}) und der Gleichung (\ref{equ:Stab-Ke-Matrix}) berechnet werden.
+	Dann werden die Gesamtmassenmatrix $ \mathbf{M} $ und Gesamtsteifigkeitsmatrix $ \mathbf{K} $ zusammengebaut, z.B. die Steifigkeitsmatrix i-tes Elements ist
+	\begin{equation}\label{equ:qudra-Kei-matrix}
+	\mathbf{K}_{ei} =
+	\left[ 
+	\begin{array}{ccc}
+	K_{ei,11} & K_{ei,12} & K_{ei,13} \\
+	K_{ei,21} & K_{ei,22} & K_{ei,23} \\
+	K_{ei,31} & K_{ei,33} & K_{ei,33} 
+	\end{array} 
+	\right] 
+	\end{equation}
+	
+	und die Gesamtsteifigkeitsmatrix $ \mathbf{K} $ ist
+	\begin{equation}\label{equ:qudra-K-matrxi}
+	\mathbf{K} = 
+	\left[ 
+	\begin{array}{cccc}
+	K_{e1,11} & K_{e1,12} & K_{e1,13}           & \cdots \\
+	K_{e1,21} & K_{e1,22} & K_{e1,23}           & \cdots \\
+	K_{e1,31} & K_{e1,32} & K_{e1,33}+K_{e2,11} & \cdots \\
+	\colon    & \colon    & \colon              & \ddots 
+	\end{array}
+	\right] 
+	\end{equation}
+	
+	und nach gleicher Regel kann die Gesamtmassenmatrix $ \mathbf{M} $ berechnet werden.
+	
+	\subsection{Biegeschwingung von Balken}
+	
+	Nach dem Prinzip von Hamilton ist die kinetische Energie von einem frei ungedämpften Balken mit der Biegeschwingung $ w(x,t) $
+	\begin{equation}\label{equ:balken-kin-energie}
+	E_{kin} = \frac{\rho A}{2} \int_{0}^{l} w_{,t}^{2} \ \mathrm{d}x
+	\end{equation}
+	
+	und die potenzielle Energie ist
+	\begin{equation}\label{equ:balken-pot-energie}
+	E_{pot} = \frac{1}{2} \int_{0}^{l} E I w_{,xx}^{2} \ \mathrm{d}x
+	\end{equation}
+	
+	und der virtuelle Arbeit ist
+	\begin{equation}\label{equ:balken-virt-arbeit}
+	\delta W = 0
+	\end{equation}
+	
+	Dann werden die drei Parameter in die Gleichung (\ref{equ:Hamilton}) eingesetzt, danach kommt folgende Gleichung
+	\begin{equation}\label{equ:balken-hamilton}
+	\delta \frac{1}{2} \int_{t_{0}}^{t_{1}} \int_{0}^{l} \rho A w_{,t}^{2} - EI w_{,xx}^{2} \ \mathrm{d}x \mathrm{d}t = 0
+	\end{equation}
+	
+	und durch das Variieren von $ \delta $ - Operator und die partielle Integration wird die Gleichung (\ref{equ:balken-hamilton}) nach folgende schwache Formulierung umgesetzt
+	\begin{equation}\label{equ:balken-hamilton-form}
+	\int_{t_{0}}^{t_{1}} \int_{o}^{l} \rho A w_{,tt} \delta w + EI  w_{,xx} \delta w_{,xx} \ \mathrm{d}x \mathrm{d}t =0
+	\end{equation}
+	
+	Diskretisierung mit
+	\begin{equation}\label{equ:balken-hamilton-ansatz}
+	w(x,t) = \vec{N}(x) \vec{w}(t)
+	\end{equation}
+	
+	ergibt
+	\begin{equation}\label{equ:balken-hamilton-end}
+	\int_{t_{0}}^{t_{1}} \int_{0}^{l} \left[ \rho A \vec{N}^{T}(x) \vec{N}(x) \vec{w}_{,tt}(t) + EI \vec{N}_{,xx}^{T}(x) \vec{N}_{,xx}(x) \vec{w}(t) \right] \mathrm{d}x \,\delta\vec{w}(t) \, \mathrm{d}t = 0
+	\end{equation}
+	
+	d.h. die Massenmatrix $ \mathbf{M}_{e} $ eines Elements ist
+	\begin{equation}\label{equ:balken-Me-matrix}
+	\mathbf{M}_{e} = \int_{0}^{l_{e}} \rho A \vec{N}^{T}(x) \vec{N}(x) \mathrm{d}x
+	\end{equation}
+	
+	und die Steifigkeitsmatrix $ \mathbf{K}_{e} $ eines Elements ist
+	\begin{equation}\label{equ:balken-Ke-matrix}
+	\mathbf{K}_{e} = \int_{0}^{l_{e}} EI \vec{N}_{,xx}^{T}(x) \vec{N}_{,xx}(x) \mathrm{d}x
+	\end{equation}
+	
+	Mit einem kubischen Ansatz für die Funktion $ w(\xi) $ lässt sich ein auch für die Balkenbiegung konformes Element gewinnen, wenn neben den Funktionswerten auch noch die ersten Ableitung in den Endpunkten als Knotenvariable eingeführt werden. Dann können die Parameter $ \vec{N}(\xi) $ und $ \vec{N}_{,xx}(\xi) $ berechnet werden.
+	
+	\subsubsection{Kubischer Ansatz}
+	
+	Bei dem kubischen Ansatz gibt es die Ansatzfunktion
+	\begin{equation}\label{equ:kubik-ansatz}
+	w(\xi) = a_{0} + a_{1}\xi + a_{2}\xi^{2} + a_{3}\xi^{3}
+	\end{equation}
+	
+	mit der folgenden Forderungen
+	\begin{equation}\label{equ:kubik-ansatz-forderungen}
+	w(-1)\overset{!}{=}u_{1} \ ; \ w_{,\xi}(-1)\overset{!}{=}\phi_{1} \ ; \ w(+1)\overset{!}{=}u_{2} \ ; \ w_{,\xi}(+1)\overset{!}{=}\phi_{2}
+	\end{equation}
+	
+	Die Forderungen (\ref{equ:kubik-ansatz-forderungen}) werden in die Funktion (\ref{equ:kubik-ansatz}) eingesetzt und die Funktion $ w(\xi) $ wird auf einen algebraischen Form umgesetzt
+	\begin{equation}\label{equ:kubik-ansatz-eingesetzt}
+	w(\xi) = 
+	\left[ 
+	\begin{array}{c}
+	-\frac{1}{16}+\frac{\xi}{16}+\frac{9\xi^{2}}{16}-\frac{9\xi^{3}}{16}\\
+	\frac{9}{16}-\frac{27\xi}{16}-\frac{9\xi^{2}}{16}+\frac{27\xi^{3}}{16}\\
+	\frac{9}{16}+\frac{27\xi}{16}-\frac{9\xi^{2}}{16}-\frac{27\xi^{3}}{16}\\
+	-\frac{1}{16}-\frac{\xi}{16}+\frac{9\xi^{2}}{16}+\frac{9\xi^{3}}{16}
+	\end{array}
+	\right]^{T} \cdot
+	\left[ 
+	\begin{array}{c}
+	w_{1}\\
+	\phi_{1}\\
+	w_{2}\\
+	\phi_{2}
+	\end{array}
+	\right] 	
+	\end{equation}
+	
+	Der Parameter $ \vec{N}(\xi) $ ist 
+	\begin{equation}\label{equ:kubik-N-vektor}
+	\vec{N}(\xi) = 
+	\left[ 
+	\begin{array}{c}
+	-\frac{1}{16}+\frac{\xi}{16}+\frac{9\xi^{2}}{16}-\frac{9\xi^{3}}{16}\\
+	\frac{9}{16}-\frac{27\xi}{16}-\frac{9\xi^{2}}{16}+\frac{27\xi^{3}}{16}\\
+	\frac{9}{16}+\frac{27\xi}{16}-\frac{9\xi^{2}}{16}-\frac{27\xi^{3}}{16}\\
+	-\frac{1}{16}-\frac{\xi}{16}+\frac{9\xi^{2}}{16}+\frac{9\xi^{3}}{16}
+	\end{array}
+	\right]^{T}
+	\end{equation}
+	
+	und die zweite x-Abteilung von $ \vec{N}(\xi) $ ist
+	\begin{equation}\label{equ:kubik-N-Abteilung}
+	\vec{N}_{,xx}(\xi) = \frac{\partial^{2} \vec{N}(\xi)}{\partial \xi^{2}} \cdot \left[ \frac{\partial \xi}{\partial x} \right]^{2} = 
+	\left[ 
+	\begin{array}{c}
+	\frac{1}{16}+\frac{9\xi}{8}-\frac{27\xi^{2}}{16}\\
+	-\frac{27}{16}-\frac{9\xi}{8}+\frac{81\xi^{2}}{16}\\
+	\frac{27}{16}-\frac{9\xi}{8}-\frac{81\xi^{2}}{16}\\
+	-\frac{1}{16}+\frac{9\xi}{8}+\frac{27\xi^{2}}{16}
+	\end{array}
+	\right]^{T} \cdot \frac{2}{l_{e}}
+	\end{equation}
+	
+	Anhand der Gleichung (\ref{equ:Stab-Me-Matrix}) und der Gleichung (\ref{equ:Stab-Ke-Matrix}) können die Massenmatrix $ \mathbf{M}_{e} $ und Steifigkeitsmatrix $ \mathbf{K}_{e} $ eines Elements berechnet werden, die Gesamtmassenmatrix $ \mathbf{M} $ und Gesamtsteifigkeitsmatrix $ \mathbf{K} $ werden zusammengebaut nach dem folgenden Regel, z.B. die Massenmatrix i-tes Elements ist
+	\begin{equation}\label{equ:kubik-Mei-matrix}
+	\mathbf{M}_{ei} = \left[ 
+	\begin{array}{cccc}
+	M_{ei,11} & M_{ei,12} & M_{ei,13} & M_{ei,14}\\
+	M_{ei,21} & M_{ei,22} & M_{ei,23} & M_{ei,24}\\
+	M_{ei,31} & M_{ei,32} & M_{ei,33} & M_{ei,34}\\
+	M_{ei,41} & M_{ei,42} & M_{ei,43} & M_{ei,44}
+	\end{array}
+	\right] 
+	\end{equation}
+	
+	und die Gesamtmassenmatrix $ \mathbf{M} $ ist
+	\begin{equation}\label{equ:kubik-M-Matrix}
+	\mathbf{M} = 
+	\left[ 
+	\begin{array}{ccccc}
+	M_{e1,11} & M_{e1,12} & M_{e1,13}           & M_{e1,14}           & \cdots \\
+	M_{e1,21} & M_{e1,22} & M_{e1,23}           & M_{e1,24}           & \cdots \\
+	M_{e1,31} & M_{e1,32} & M_{e1,33}+M_{e2,11} & M_{e1,34}+M_{e2,12} & \cdots \\
+	M_{e1,41} & M_{e1,42} & M_{e1,43}+M_{e2,21} & M_{e1,44}+M_{e2,22} & \cdots \\
+	\colon    & \colon    & \colon              & \colon              & \ddots 
+	\end{array}
+	\right] 
+	\end{equation}
+	
+	und die Gesamtsteifigkeitsmatrix $ \mathbf{K} $ kann auch nach gleicher Regeln berechnet werden.
+	
+	\section{Zweite Dimension}
+	Beispielsweise werden hier sogenannte ebene Flächentragwerke behandelt, deren Dicke $ h $ im Verhältnis zu den beiden anderen Abmessungen kein ist.
+	Zuerst wird eine dünne Platte mit konstanter Dicke $ h $ und Rechteckform betrachtet, deren Mittelebene mit der $ (x,y) $-Ebene zusammenfällt.
+	Mit den verbleibenden Spannungen $ t_{xx}, t_{yy}, t_{xy} \neq 0 $ kann die potentielle Energie in Spannungen oder rechentechnisch günstiger in gemischter Schreibweise einfach angegeben werden:
+	\begin{equation}\label{equ:platten-pot-energie}
+	E_{pot} = \frac{1}{2} \underset{V}{\ \int} \left( t_{xx}\varepsilon_{xx} + t_{yy}\varepsilon_{yy} + 2t_{xy}\varepsilon_{xy} \right) \mathrm{d}V
+	\end{equation}
+	
+	Mit dem Hookeschen Gesetz und anschließender Umkehrung können über
+	\begin{equation}\label{equ:platten-hookgesetz}
+	t_{xx} = \frac{E}{1-\nu^{2}}\left(\varepsilon_{xx}+\nu\varepsilon_{yy}\right), \ t_{yy}=\frac{E}{1-\nu^{2}}\left(\varepsilon_{yy}+\nu\varepsilon_{xx}\right), \ t_{xy}=\frac{E}{1+\nu}\varepsilon_{xy}
+	\end{equation}
+	
+	die Spannungen $ t_{ij} $ durch die Verzerrungen $ \varepsilon_{ij} $ ausgedrückt werden, und danach kommt eine folgende Formulierung
+	\begin{equation}\label{equ:platten-kin-formulierung}
+	E_{pot}= \frac{E}{2(1-\nu^{2})} \underset{A}{ \ \ \int} \overset{\ \ +h/2}{\underset{-h/2}{\ \int}} \left(\varepsilon_{xx}^{2}+2\nu\varepsilon_{xx}\varepsilon_{yy}+\varepsilon_{yy}^{2}\right) \mathrm{d}Z\mathrm{d}A + \frac{E}{(1+\nu)} \underset{A}{ \ \ \int} \overset{\ \ +h/2}{\underset{-h/2}{ \ \int}} \varepsilon_{xy}^{2} \, \mathrm{d}Z\mathrm{d}A
+	\end{equation}
+	
+	der kinetischen Energie in Verzerrungsgrößen.\\
+	die Verzerrungsgrößen werden in Anteilen des Verschiebungsvektors $ \vec{u} $ ausgedrückt
+	\begin{equation}\label{equ:platten-verschiebungsvektor}
+	\left[ 
+	\begin{array}{c}
+	u_{x}\\
+	u_{y}\\
+	u_{z}
+	\end{array} 
+	\right] 
+	=
+	\left[ 
+	\begin{array}{ccc}
+	1 & 0 & -Z\frac{\partial}{\partial X}\\
+	0 & 1 & -Z\frac{\partial}{\partial Y}\\
+	0 & 0 & 1
+	\end{array}
+	\right]
+	\left[ 
+	\begin{array}{c}
+	w_{x}\\
+	w_{y}\\
+	w_{z}
+	\end{array}	
+	\right] 
+	\end{equation}
+	
+	Es treten allerdings nur noch drei voneinander unabhängige Verschiebungen $ w_{x} $, $ w_{y} $ und $ w_{z} $ eines materiellen Mittelflächenpunktes ohne einen  Torsionswinkel auf, und die Biegewinkel sind über $ w_{z,X} $ und $ w_{z,Y} $ mit der zugehörigen Durchbiegung $ w_{z} $ verknüpft. Die in Gleichung (\ref{equ:platten-kin-formulierung})) benötigten Verzerrungen $ \varepsilon_{ij} $, die erneut am einfachsten aus den Verzerrungs-Verschiebungs-Relationen
+	\begin{equation}\label{equ:verschiebung-verzerrung-relation}
+	\varepsilon_{i,j} = \frac{1}{2} \left( u_{i,j} + u_{j,i} \right) 
+	\end{equation}
+	
+	berechnet werden können, dann kommt folgende Form
+	\begin{equation}\label{equ:verschiebung-verzerrung-form}
+	\begin{array}{l}
+	\varepsilon_{xx}=w_{x,X}-Zw_{z,XX}, \quad \varepsilon_{yy}=w_{y,Y}-Zw_{z,YY}\\
+	\varepsilon_{xy}=\frac{1}{2}\left( w_{x,Y}+w_{y,X} \right) -Zw_{z,XY}
+	\end{array}
+	\end{equation}
+	
+	darin wird nur die Verschiebung $ w_{z} $ betrachtet, weil es in dieser Arbeit nur um die Biegeschwingung von Platten geht. Deshalb sind die Verschiebungen $ w_{x} $ und $ w_{y} $ jetzt null.
+	Mit $ \mathrm{d}V=\mathrm{d}Z\mathrm{d}A $ und den dickespezifischen Parametern
+	\begin{equation}\label{equ:platten-dZ}
+	\overset{\ \ +h/2}{\underset{-h/2}{\ \int}} \mathrm{d}Z = h, \ \overset{\ \ +h/2}{\underset{-h/2}{ \ \int}} Z^{2}\mathrm{d}Z=\frac{h^{3}}{12}
+	\end{equation}
+	
+	die im Allgemeinen von den metrischen Parametern $ X $, $ Y $ abhängen können, ergibt sich nach Integration über die Dickenkoordinate das Endergebnis für die potenzielle Energie
+	\begin{equation}\label{equ:platten-pot-energie-end}
+	E_{pot}=\frac{E}{2\cdot12(1-\nu^{2})} \underset{A}{\ \int} h^{3} \left[ w_{z,XX}^{2}+w_{z,YY}^{2}+2vw_{z,XX}w_{z,YY}+2(1-\nu)w_{z,XY}^{2} \right] \mathrm{d}A
+	\end{equation}
+	
+	Für die kinetische Energie wird eine entsprechende Rechnung wie in erster Dimension durchgeführt
+	\begin{equation}\label{equ:platten-kin-energie}
+	E_{kin}= \frac{\rho}{2} \underset{A}{\ \int} hw_{z,t}^{2} \mathrm{d}A
+	\end{equation}
+	
+	und der virtuelle Arbeit ist
+	\begin{equation}\label{platten-virt-arbeit}
+	\delta W = 0 \ ,
+	\end{equation}
+	da die Platte jetzt frei ungedämpft ist.
+	
+	Durch den folgenden Ansatz
+	\begin{equation}\label{equ:platten-w-ansatz}
+	w_{z} = \vec{N}(X,Y)\vec{w}(t)
+	\end{equation}
+	
+	und anhand des Prinzips von Hamilton (\ref{equ:Hamilton}) kommt folgende Gleichung 
+	\begin{equation}\label{equ:platten-hamilton-ansatz}
+	\begin{split}	
+	0=\ &\int_{t_{0}}^{t_{1}} \underset{A \}{\int} \left\lbrace  \rho h \vec{N}^{T}(x) \vec{N}(x) \vec{w}_{,tt}(t) + \frac{Eh^{3}}{12(1-\nu^{2})} \left[ \vec{N}_{,XX}^{T}\vec{N}_{,XX} \right. \right. \\
+	& \left. \left. + \nu(\vec{N}_{,XX}^{T}\vec{N}_{,YY}+\vec{N}_{,YY}^{T}\vec{N}_{,XX}) + \vec{N}_{,YY}^{T}\vec{N}_{,YY} +2(1-\nu)\vec{N}_{,XY}^{T}\vec{N}_{,XY} \right]  \right\rbrace  \mathrm{d}A \delta\vec{w}(t) \mathrm{d}t 
+	\end{split}
+	\end{equation}
+	
+	Deshalb ist die Massenmatrix eines Elements
+%	\begin{equation}\label{equ:platten-Me-matrix}
+%	\mathbf{M}_{e} = \int_{0}^{l_{Xe}} \int_{0}^{l_{Ye}} \rho h \vec{N}^{T} \vec{N} \ \mathrm{d}Y\mathrm{d}X
+%	\end{equation}
+	
+	\begin{equation}\label{equ:platten-Me-matrix}
+	\mathbf{M}_{e} = \underset{A_{e}}{\ \int} \rho h \vec{N}^{T} \vec{N} \ \mathrm{d}A_{e}
+	\end{equation}
+	
+	
+	
+	und die Steifigkeitsmatrix eines Elements ist
+%	\begin{equation}\label{equ:platten-Ke-matrix}
+%	\begin{split}
+%	\mathbf{K}_{e} = & \int_{0}^{l_{Xe}} \int_{0}^{l_{Ye}} \frac{Eh^{3}}{12(1-\nu^{2})} \left[ \vec{N}_{,XX}^{T}\vec{N}_{,XX} + \nu\left( \vec{N}_{,XX}^{T}\vec{N}_{,YY}+\vec{N}_{,YY}^{T}\vec{N}_{,XX}\right) \right. \\
+%	& \left.  + \vec{N}_{,YY}^{T}\vec{N}_{,YY} +2(1-\nu)\vec{N}_{,XY}^{T}\vec{N}_{,XY} \right] \mathrm{d}Y\mathrm{d}X
+%	\end{split}
+%	\end{equation}
+	
+	\begin{equation}\label{equ:platten-Ke-matrix}
+	\begin{split}
+	\mathbf{K}_{e} = & \underset{A_{e}}{\ \int} \frac{Eh^{3}}{12(1-\nu^{2})} \left[ \vec{N}_{,XX}^{T}\vec{N}_{,XX} + \nu\left( \vec{N}_{,XX}^{T}\vec{N}_{,YY}+\vec{N}_{,YY}^{T}\vec{N}_{,XX}\right) \right. \\
+	& \left.  + \vec{N}_{,YY}^{T}\vec{N}_{,YY} +2(1-\nu)\vec{N}_{,XY}^{T}\vec{N}_{,XY} \right] \mathrm{d}A_{e}
+	\end{split}
+	\end{equation}
+	
+	
+	\section{Analysieren der Ergebnisse}
+	
+	\section{Zusammenfassung}
+	
+\end{document}

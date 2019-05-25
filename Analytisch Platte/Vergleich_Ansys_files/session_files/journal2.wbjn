@@ -1,0 +1,27 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+system1 = GetSystem(Name="SYS")
+system2 = system1.Duplicate(RelativeTo=system1)
+system2.Move(
+    Position="Below",
+    RelativeTo=system1)
+system3 = system2.Duplicate(RelativeTo=system2)
+system3.Move(
+    Position="Below",
+    RelativeTo=system2)
+system1.DisplayText = "Platte FF"
+system2.DisplayText = "Platte Lagerung 1"
+system3.DisplayText = "Platte Lagerung 2"
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Edit()
+model1.Exit()
+results1 = system2.GetContainer(ComponentName="Results")
+results1.Edit()
+model2 = system2.GetContainer(ComponentName="Model")
+model2.Exit()
+results2 = system3.GetContainer(ComponentName="Results")
+results2.Edit()
+model3 = system3.GetContainer(ComponentName="Model")
+model3.Exit()
+Save(Overwrite=True)
